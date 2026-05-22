@@ -396,7 +396,7 @@ with tabs[1]:
 
     # Tabla de ranking
     st.markdown("**Tabla Estadística Completa**")
-    st.dataframe(df_ranking.style.background_gradient(subset=["Media"], cmap="Blues"),
+    st.dataframe(df_ranking,
                  use_container_width=True)
 
 
@@ -438,7 +438,7 @@ with tabs[2]:
         Desv_Est="std", Mínimo="min", Máximo="max"
     ).round(3)
     st.markdown(f"**Estadísticos descriptivos de Bienestar por {factor_sel.replace('_',' ')}**")
-    st.dataframe(resumen.style.background_gradient(subset=["Media"], cmap="Blues"),
+    st.dataframe(resumen,
                  use_container_width=True)
 
     # Comparación adicional: Bienestar vs Burnout por modalidad
@@ -697,7 +697,7 @@ with tabs[6]:
 
     # Tabla de perfiles
     st.markdown("**Caracterización de Perfiles**")
-    st.dataframe(df_perfiles.style.background_gradient(cmap="Blues"),
+    st.dataframe(df_perfiles,
                  use_container_width=True)
 
     # Radar chart
@@ -706,17 +706,13 @@ with tabs[6]:
     categorias = df_radar.columns.tolist()
 
     fig3 = go.Figure()
-    colores_radar = [
-    (C_SECONDARY, "rgba(23,185,120,0.25)"),
-    (C_WARN,      "rgba(255,107,107,0.25)"),
-    (C_NEUTRAL,   "rgba(144,180,206,0.25)"),
-]
-for (perfil, row), (line_color, fill_color) in zip(df_radar.iterrows(), colores_radar):
-    vals = row.tolist() + [row.tolist()[0]]
-    cats = categorias + [categorias[0]]
-    fig3.add_trace(go.Scatterpolar(r=vals, theta=cats, fill="toself",
-                                   name=perfil, line_color=line_color,
-                                   fillcolor=fill_color))
+    colores_radar = [C_SECONDARY, C_WARN, C_NEUTRAL]
+    for (perfil, row), color in zip(df_radar.iterrows(), colores_radar):
+        vals = row.tolist() + [row.tolist()[0]]
+        cats = categorias + [categorias[0]]
+        fig3.add_trace(go.Scatterpolar(r=vals, theta=cats, fill="toself",
+                                       name=perfil, line_color=color,
+                                       fillcolor=color + "44"))
     fig3.update_layout(polar=dict(radialaxis=dict(visible=True, range=[0,10])),
                        title="Radar de Perfiles Psicosociales", title_font_color=C_PRIMARY,
                        showlegend=True, height=420, margin=dict(t=60, b=20))
