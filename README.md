@@ -1,90 +1,165 @@
-# 🧠 Dashboard — Bienestar Laboral
+# Employee Well-Being Analytics & Interactive Dashboard
 
-Dashboard interactivo de Análisis Exploratorio de Datos (EDA) sobre salud psicosocial y bienestar en el trabajo.  
-Construido con **Python · Streamlit · Plotly**.
+[Español](README_ES.md) | **English**
 
----
+Interactive data analytics project focused on workplace well-being, burnout, job satisfaction, leadership, psychosocial risk, and turnover intention.
 
-## 📁 Estructura del Proyecto
+Built with **Python, Pandas, Plotly, Streamlit, Statsmodels, and Scikit-learn**.
 
-```
-proyecto-dashboard/
-│
-├── app.py                  ← Dashboard principal (Streamlit)
-├── requirements.txt        ← Dependencias para despliegue
+> This project was developed as an academic Data Science case study at Universidad de La Sabana. It is presented here as a portfolio project to demonstrate data analysis, statistical modeling, visualization, clustering, and dashboard development skills.
+
+## Business Problem
+
+Employee well-being is influenced by multiple organizational and psychosocial factors. Looking at these variables independently can make it difficult to identify the employees or groups that may require attention.
+
+The objective of this project is to transform employee survey data into an interactive analytical tool that helps explore:
+
+- Workplace well-being
+- Burnout and exhaustion
+- Job satisfaction
+- Leadership
+- Psychosocial risk dimensions
+- Turnover intention
+- Employee risk profiles
+
+## Dataset
+
+The analysis uses a dataset of **400 employees** containing demographic information and **15 psychosocial dimensions**.
+
+The dimensions analyzed include well-being, burnout, exhaustion, somatization, job satisfaction, turnover intention, leadership commitment, time pressure, coworker support, role conflict, change management, organizational mental health, role clarity, and work-family conflict variables.
+
+## Analytical Workflow
+
+The project follows an end-to-end analytics workflow:
+
+1. Data loading and quality checks
+2. Data cleaning and preparation
+3. Exploratory Data Analysis (EDA)
+4. Demographic and psychosocial segmentation
+5. Correlation analysis
+6. Linear regression analysis
+7. K-Means clustering
+8. Risk-profile interpretation
+9. Interactive dashboard development with Streamlit
+
+## Key Results
+
+### Burnout and related risk factors
+
+Burnout shows strong positive relationships with other psychosocial risk dimensions:
+
+- **Burnout ↔ Exhaustion:** r = 0.658
+- **Burnout ↔ Somatization:** r = 0.610
+- **Exhaustion ↔ Somatization:** r = 0.554
+
+These relationships suggest that burnout should be analyzed together with physical and emotional exhaustion indicators rather than as an isolated dimension.
+
+### Leadership and employee experience
+
+Leadership is associated with both positive and negative employee outcomes:
+
+- **Leadership ↔ Job Satisfaction:** r = 0.487
+- **Leadership ↔ Burnout:** r = -0.533
+
+Higher leadership scores are therefore associated with greater job satisfaction and lower burnout levels in this dataset.
+
+### Turnover intention
+
+A linear regression was used to analyze the relationship between job satisfaction and turnover intention.
+
+- **R²:** 0.704
+- **Slope:** -1.150
+- **Intercept:** 9.430
+- **p-value:** 2.28e-107
+
+The model identifies a strong negative association: higher job satisfaction is associated with lower turnover intention. This is an observational analysis and should not be interpreted as proof of causality.
+
+### Employee segmentation
+
+K-Means clustering was used to identify **three employee profiles**:
+
+| Profile | Employees |
+|---|---:|
+| Stable profile | 112 |
+| High-risk profile | 79 |
+| Moderate-risk profile | 209 |
+
+The segmentation provides a practical way to compare groups and prioritize exploratory intervention analysis.
+
+## Interactive Dashboard
+
+The Streamlit application organizes the analysis into multiple interactive sections:
+
+| Section | Analysis |
+|---|---|
+| Demographic Profile | Gender, work modality, sector and age |
+| Risk Ranking | Comparison of psychosocial dimensions |
+| Well-Being by Group | Analysis by role, sector and modality |
+| Burnout & Exhaustion | Relationships between burnout-related variables |
+| Leadership | Leadership, satisfaction and burnout analysis |
+| Turnover Analysis | Statistical relationship between satisfaction and turnover intention |
+| Employee Profiles | K-Means clustering and profile comparison |
+| Intervention Matrix | Global risk visualization and prioritization |
+
+The dashboard includes interactive filters and visualizations designed to make the statistical results easier to explore and interpret.
+
+## Technologies
+
+- Python
+- Pandas
+- NumPy
+- Plotly
+- Streamlit
+- Statsmodels
+- Scikit-learn
+- Jupyter Notebook
+- OpenPyXL
+
+## Repository Structure
+
+```text
+.
 ├── README.md
-│
+├── README_ES.md
+├── app.py
+├── crear_app.py
+├── requirements.txt
 ├── data/
-│   └── bienestar_laboral_limpio.xlsx   ← Dataset (reemplazar con datos reales)
-│
-├── assets/                 ← Logos, imágenes (opcional)
-│
+│   └── bienestar_laboral_limpio.xlsx
 └── notebook/
-    └── analisis.ipynb      ← Notebook original del EDA
+    └── analisis.ipynb
 ```
 
----
+The structure above reflects the repository in its current state. File and repository names may be standardized as part of future portfolio improvements.
 
-## ⚡ Correr localmente
+## Run Locally
 
-### 1. Clonar el repositorio
+Clone the repository and enter the project directory:
+
 ```bash
-git clone https://github.com/TU_USUARIO/TU_REPO.git
-cd TU_REPO
+git clone <repository-url>
+cd <repository-folder>
 ```
 
-### 2. Crear entorno virtual (recomendado)
+Create and activate a virtual environment, then install the dependencies:
+
 ```bash
 python -m venv venv
-source venv/bin/activate        # macOS / Linux
-venv\Scripts\activate           # Windows
-```
-
-### 3. Instalar dependencias
-```bash
 pip install -r requirements.txt
 ```
 
-### 4. Agregar el dataset
-Coloca tu archivo `bienestar_laboral_limpio.xlsx` (o `.csv`) dentro de la carpeta `data/`.
+Run the Streamlit application:
 
-### 5. Lanzar el dashboard
 ```bash
 streamlit run app.py
 ```
-El navegador se abre automáticamente en `http://localhost:8501`
 
----
+## Skills Demonstrated
 
-## 🚀 Despliegue en Streamlit Community Cloud
+`Data Analysis` · `Python` · `Pandas` · `Exploratory Data Analysis` · `Statistical Analysis` · `Linear Regression` · `K-Means Clustering` · `Data Visualization` · `Streamlit` · `Dashboard Development`
 
-1. Sube el repositorio a GitHub (público o privado).
-2. Ve a **[share.streamlit.io](https://share.streamlit.io)** e inicia sesión con GitHub.
-3. Haz clic en **"New app"**.
-4. Selecciona tu repositorio, rama (`main`) y archivo (`app.py`).
-5. Haz clic en **"Deploy"** — Streamlit instala las dependencias automáticamente desde `requirements.txt`.
-6. En 1–2 minutos tu dashboard estará en línea con una URL pública.
+## Author
 
-> ⚠️ **Dataset en repositorios públicos:** Si tu dataset es confidencial, no lo subas a un repositorio público. Usa **Streamlit Secrets** o una fuente externa (Google Sheets, S3, etc.).
-
----
-
-## 📊 Secciones del Dashboard
-
-| Tab | Análisis |
-|-----|----------|
-| 📊 Perfil Demográfico | Sexo, Modalidad, Sector, Edad |
-| 📈 Ranking de Riesgo | Boxplots y medias de las 15 dimensiones |
-| 🔬 Bienestar por Grupo | Comparativa por Cargo, Sector y Modalidad |
-| 🔥 Burnout & Desgaste | Correlaciones y dispersión del síndrome |
-| 🤝 Rol del Liderazgo | Impacto del liderazgo en satisfacción y burnout |
-| 🎯 Predicción Retiro | Modelo OLS satisfacción → intención de retiro |
-| 👥 Perfiles / Clustering | K-Means k=3 + radar de perfiles |
-| 🚨 Matriz de Intervención | Heatmap global + acciones prioritarias |
-
----
-
-## 🎓 Proyecto Final — Análisis de Datos
-
-> Dataset: 400 trabajadores · 15 dimensiones psicosociales  
-> Metodología: EDA + Regresión OLS + K-Means Clustering
+**David Santiago Cifuentes Grimaldo**  
+Data Science Student  
+Universidad de La Sabana
